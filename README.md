@@ -2,9 +2,9 @@
 Gra tekstowa w języku C + link do schematu blokowego
 
 Uzasadnienia dla zastosowania konretnych bibliotek:
-#include <locale.h> //Gra korzysta z polskich znaków stąd zastosowanie tej biblioteki.
-#include <stdbool.h> //Program korzysta ze zmiennej bool w strukturze (która przetrzymuje dane gracza: umiejętności które posiada gracz, zasoby pozyskane przez gracza) bool jest użyty jako true/false dla umiejętności które posiada gracz.
-#include <windows.h> //Program został napisany na widowsie jako gra na windowsa stąd użycie biblioteki windows.h + program używa system("cls"); żeby zwiększyć czytelność tekstu w konsoli a funkcja ta działa tylko dla systemu windows.
+#include <locale.h> //Gra korzysta z polskich znaków stąd zastosowanie tej biblioteki. (gra ma zmienne w języku angielskim, tekst wypisywany w konsoli jest w języku polskim)
+#include <stdbool.h> //Program korzysta ze zmiennej bool w strukturze (która przetrzymuje dane gracza: umiejętności które pozyskał gracz podczas rozgrywki) bool jest użyty jako true/false dla umiejętności które posiada gracz.
+#include <windows.h> //Program został napisany na widowsie jako gra na windowsa stąd użycie biblioteki windows.h + program używa system("cls") żeby zwiększyć czytelność tekstu w konsoli a funkcja ta działa tylko dla systemu windows.
 
 
 To jest link do aplikacji miro gdzie znajduje się schemat blokowy do wglądu nie umieściłem go wewnątrz pdf'a z powodu rozmiaru shcematu dla całego programu:
