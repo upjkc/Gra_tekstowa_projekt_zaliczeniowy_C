@@ -1,5 +1,5 @@
 # Gra_tekstowa_projekt_zaliczeniowy_C
-Gra tekstowa w języku C + link do schematu blokowego
+Projekt zaliczeniowy na przedmiot Technologie informacyjne, gra tekstowa w języku C.
 
 Uzasadnienia dla zastosowania konretnych bibliotek:
 
