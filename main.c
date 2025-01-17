@@ -2,7 +2,6 @@
 
 
 /*
-strlen(user_input) != 1 || user_input[0] != 't'
 
 
 
