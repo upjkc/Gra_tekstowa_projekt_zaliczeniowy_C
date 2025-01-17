@@ -102,6 +102,7 @@ Racoon by Joan Stark - art from https://www.asciiart.eu/animals/cats
       ==`==`   ==`   ==`
 */
 #define _CRT_SECURE_NO_WARNINGS
+
 #include <stdio.h>
 #include <locale.h>//Gra korzysta z polskich znaków stąd zastosowanie tej biblioteki
 #include <ctype.h>
@@ -303,6 +304,9 @@ void go_back_to_home_ending() {
         printf("               _||\n");
         printf("              >__/ \n", 92);
         printf("Gratulacje Alfredzie\033[0m\n");
+        Sleep(10000);
+        exit(0);
+
         return 0;
     }
     else {
@@ -332,6 +336,8 @@ void go_back_to_home_ending() {
             if (ending_choice == 1) {
                 system("cls");
                 printf("END\n");
+                Sleep(5000);
+                exit(0);
                 return 0;
             }
             else if (ending_choice == 2) {
@@ -487,7 +493,9 @@ void way_to_the_city() {
                     if (ending_choice == 1) {
                         system("cls");
                         printf("END\n");
-                        return;
+                        Sleep(5000);
+                        exit(0);
+                        return 0;
                     }
                     else if (ending_choice == 2) {
                         system("cls");
@@ -641,8 +649,9 @@ void bank_menu() {
     printf("Bank\n");
     printf("W banku widzisz pracowniczkę banku i szefa banku, który rozmawia z jednym ze swoich pracowników\n");
     printf("Wybierz co chcesz zrobić w banku:\n(1)Porozmawiaj z pracowniczką banku\n(2)Porozmawiaj z szefem banku\n(3)Wyjdź z banku\n");
-    char bank_worker_choice;
-    scanf(" %d", &bank_worker_choice);
+
+    int bank_worker_choice;
+    scanf("%d", &bank_worker_choice);
 
     if (bank_worker_choice == 1) {
         bank_worker();
@@ -663,6 +672,8 @@ void bank_menu() {
         bank_menu();
     }
 }
+
+
 //------------------------------------------------------------------------Bank-------------------------------------------------------------------------------------------------------------------------------/
 
 
@@ -777,6 +788,8 @@ void shopseller_fight() {
                     if (ending_choice == 1) {
                         system("cls");
                         printf("END\n");
+                        Sleep(5000);
+                        exit(0);
                         return 0;
                     }
                     else if (ending_choice == 2) {
@@ -835,6 +848,8 @@ void shopseller_fight() {
                     if (ending_choice == 1) {
                         system("cls");
                         printf("END\n");
+                        Sleep(5000);
+                        exit(0);
                         return 0;
                     }
                     else if (ending_choice == 2) {
@@ -962,60 +977,7 @@ void shop_menu() {
 
 
 //------------------------------------------------------------------------Kasyno-----------------------------------------------------------------------------------------------------------------------------/
-/*
 
-
-
-
-*/
-
-//void spin_the_numbers_in_machine() {
-//    system("cls");
-//    int random_number_1;
-//    int random_number_2;
-//    int random_number_3;
-//    add_money(-2);
-//    random_number_1 = rand() % 7 + 1;
-//    random_number_2 = rand() % 7 + 1;
-//    random_number_3 = rand() % 7 + 1;
-//    printf("%d, %d, %d", random_number_1, random_number_2, random_number_3);
-//    if ((random_number_1 == random_number_2) && (random_number_2 == random_number_3)) {
-//        printf("\033[33mMaszyna do gry (jednoręki bandyta)\n\n");
-//        printf("      ___________      \n");
-//        printf("     /___________%c     \n", 92);
-//        printf("     |  _______  | ({})\n");
-//        printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
-//        printf("     |  ```````  |__|| \n");
-//        printf("     |:::::::::::|---' \n");
-//        printf("     |  BIG WIN  |     \n");
-//        printf("     |:::::::::::|     \n");
-//        printf("     |___________|     \n\n");
-//        printf(" _______   ______   ______         __       __  ______  __    __ \n");
-//        printf("/       %c /      | /      %c       /  |  _  /  |/      |/  %c  /  |\n", 92, 92, 92);
-//        printf("$$$$$$$  |$$$$$$/ /$$$$$$  |      $$ | / %c $$ |$$$$$$/ $$  %c $$ |\n", 92, 92);
-//        printf("$$ |__$$ |  $$ |  $$ | _$$/       $$ |/$  %c$$ |  $$ |  $$$  %c$$ |\n", 92, 92);
-//        printf("$$    $$<   $$ |  $$ |/    |      $$ /$$$  $$ |  $$ |  $$$$  $$ |\n");
-//        printf("$$$$$$$  |  $$ |  $$ |$$$$ |      $$ $$/$$ $$ |  $$ |  $$ $$ $$ |\n");
-//        printf("$$ |__$$ | _$$ |_ $$ %c__$$ |      $$$$/  $$$$ | _$$ |_ $$ |$$$$ |\n", 92);
-//        printf("$$    $$/ / $$   |$$    $$/       $$$/    $$$ |/ $$   |$$ | $$$ |\n");
-//        printf("$$$$$$$/  $$$$$$/  $$$$$$/        $$/      $$/ $$$$$$/ $$/   $$/ \n\033[0m");
-//
-//    }
-//    else {
-//        printf("Maszyna do gry (jednoręki bandyta)\n\n");
-//        printf("      ___________      \n");
-//        printf("     /___________%c     \n", 92);
-//        printf("     |  _______  | ({})\n");
-//        printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
-//        printf("     |  ```````  |__|| \n");
-//        printf("     |:::::::::::|---' \n");
-//        printf("     |           |     \n");
-//        printf("     |:::::::::::|     \n");
-//        printf("     |___________|     \n\n");
-//        printf("Niczego nie wygrałeś\n");
-//
-//    }
-//}
 
 
 void slot_machine() {
@@ -1097,6 +1059,8 @@ void slot_machine() {
                         if (ending_choice == 1) {
                             system("cls");
                             printf("END\n");
+                            Sleep(5000);
+                            exit(0);
                             return 0;
                         }
                         else if (ending_choice == 2) {
@@ -1144,6 +1108,8 @@ void slot_machine() {
                     printf("               _||\n");
                     printf("              >__/ \n", 92);
                     printf("Gratulacje Alfredzie\033[0m\n");
+                    Sleep(10000);
+                    exit(0);
 
                     return 0;
                 }
@@ -1366,57 +1332,65 @@ void work_in_the_mini_zoo() {
     go_back_to_the_city();
 }
 
-
-
+bool game_running = true;
 
 void mini_Zoo_menu() {
-    while (1) {
+    bool exit_flag = false; 
+
+    while (!exit_flag && game_running) {  
         char mini_zoo_choice_1;
         char mini_zoo_choice_2;
+
+        system("cls"); 
         printf("Małe Zoo\n");
-        printf("\033[92mSzef małego Zoo: Witaj w małym zoo. Czemu tu się zjawiłeś nie przypominam sobie żebyśmy hodowali gęsi?\033[0m\n");
+        printf("\033[92mSzef małego Zoo: Witaj w małym zoo. Czemu tu się zjawiłeś? Nie przypominam sobie, żebyśmy hodowali gęsi.\033[0m\n");
         printf("Alfred: Widzi pan, potrzebuję...\n");
         printf("(k)karmy\n(n)nie potrzebuje niczego\n");
         scanf(" %c", &mini_zoo_choice_1);
+        getchar();
+
         if (mini_zoo_choice_1 == 'k') {
-            printf("\033[92mSzef małego Zoo: Skoro potrzebuje pan karmy, mogę zaoferować panu pracę na najbliższą godzinę. Będzie pan zabawiał u nas dzieci a w zamian otrzyma pan pieniądze za, które może pan kupić karmę\033[0m\n");
-            printf("Alfred: Czyli dostanę karmę? czy tylko pieniądze?\n");
-            printf("\033[92mSzef małego Zoo: Dostanie pan walutę za, którą będzie pan mógł kupić karmę.\nJeżeli pan nie wie jak działa waluta powinien się pan potem zgłosić do banku, tam panu wszystko wytłumaczą.\033[0m\n");
+            printf("\033[92mSzef małego Zoo: Skoro potrzebuje pan karmy, mogę zaoferować panu pracę na najbliższą godzinę. Będzie pan zabawiał u nas dzieci, a w zamian otrzyma pan pieniądze za, które może pan kupić karmę.\033[0m\n");
+            printf("Alfred: Czyli dostanę karmę? Czy tylko pieniądze?\n");
+            printf("\033[92mSzef małego Zoo: Dostanie pan walutę, za którą będzie pan mógł kupić karmę.\033[0m\n");
+
             while (1) {
-                printf("\033[92mSzef małego Zoo: To jak chce pan u nas pracować?\033[0m\n");
+                printf("\033[92mSzef małego Zoo: To jak. Chce pan u nas pracować?\033[0m\n");
                 printf("(t)tak\n(n)nie\n");
                 scanf(" %c", &mini_zoo_choice_2);
+                getchar();
+
                 if (mini_zoo_choice_2 == 't') {
                     work_in_the_mini_zoo();
-
+                    break; 
                 }
                 else if (mini_zoo_choice_2 == 'n') {
                     go_back_to_the_city();
+                    exit_flag = true;  
+                    break;
                 }
                 else {
                     system("cls");
-                    printf("Wprowadziłeś niepoprawną wartość spróbuj jeszcze raz\n");
+                    printf("Wprowadziłeś niepoprawną wartość. Spróbuj jeszcze raz.\n");
                     printf("Kliknij Enter...\n");
-                    getchar();
-                    getchar();
-
+                    getchar();  
                 }
             }
-            break;
         }
         else if (mini_zoo_choice_1 == 'n') {
             go_back_to_the_city();
-            break;
+            exit_flag = true;  
         }
         else {
             system("cls");
-            printf("Wprowadziłeś niepoprawną wartość spróbuj jeszcze raz\n");
+            printf("Wprowadziłeś niepoprawną wartość. Spróbuj jeszcze raz.\n");
             printf("Kliknij Enter...\n");
-            getchar();
-            getchar();
+            getchar();  
         }
     }
 }
+
+
 //------------------------------------------------------------------------Mini Zoo---------------------------------------------------------------------------------------------------------------------------/
 
 //------------------------------------------------------------------------Wysypisko--------------------------------------------------------------------------------------------------------------------------/
@@ -1495,10 +1469,11 @@ void racoon_ending() {
     printf("               _||\n");
     printf("              >__/ \n", 92);
     printf("Gratulacje Alfredzie\033[0m\n");
+    Sleep(10000);
+    exit(0);
     getchar();
     return 0;
 }
-
 //95
 void meet_the_racoon() {
     system("cls");
