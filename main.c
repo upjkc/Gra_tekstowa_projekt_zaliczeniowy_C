@@ -406,12 +406,20 @@ void start() {
 
 void way_to_the_city() {
     system("cls");
-    char risky_money_choice[10];
-    printf("Idać drogą do miasta zauważasz na jej środku błyszczący przedmiot przypominający monetę\n");
-    printf("Czy chcesz podjeść i podnieść przedmiot, czy wolisz odrazu iść dalej\n");
-    printf("Wpisz:\n(tak)jeśli chcesz podnieść przedmiot\n(nie)jeśli chcesz go pominąć\n");
+    printf("Idąc drogą do miasta zauważasz na jej środku błyszczący przedmiot przypominający monetę\n");
+    printf("Czy chcesz podejść i podnieść przedmiot, czy wolisz od razu iść dalej\n");
+    printf("Wpisz:\n(tak) jeśli chcesz podnieść przedmiot\n(nie) jeśli chcesz go pominąć\n");
+
     while (1) {
-        scanf("%9s", risky_money_choice);
+        char risky_money_choice[10];
+
+        if (scanf("%9s", risky_money_choice) != 1) {
+            while (getchar() != '\n');
+            system("cls");
+            printf("Wprowadziłeś niepoprawną wartość, spróbuj jeszcze raz.\n");
+            printf("Wpisz:\n(tak) jeśli chcesz podnieść przedmiot\n(nie) jeśli chcesz go pominąć\n");
+            continue;
+        }
 
         if (strcmp(risky_money_choice, "tak") == 0) {
             system("cls");
@@ -421,7 +429,7 @@ void way_to_the_city() {
                 add_money(5);
                 printf("\033[33mPodniosłeś 5$ i ruszasz dalej do miasta\033[0m\n");
                 printf("Kliknij Enter aby kontynuować...\n");
-                getchar();
+                while (getchar() != '\n');
                 getchar();
                 city_menu();
             }
@@ -434,16 +442,15 @@ void way_to_the_city() {
                 printf("|^^________________%c_           ___/________________^^|\n", 92);
                 printf("|____________________%c_________/______________________|\n\n\n", 92);
                 printf("Przegrana\033[0m\n");
+
                 while (1) {
                     printf("Czy chcesz zagrać ponownie czy zakończyć rozgrywkę:\n");
                     printf("(1) Zakończ rozgrywkę\n");
                     printf("(2) Zagraj ponownie\n");
 
                     int ending_choice;
-                    int result = scanf(" %d", &ending_choice);
 
-                    if (result != 1) {
-
+                    if (scanf("%d", &ending_choice) != 1) {
                         printf("Wprowadziłeś niepoprawną wartość. Spróbuj ponownie.\n");
                         while (getchar() != '\n');
                         continue;
@@ -452,7 +459,7 @@ void way_to_the_city() {
                     if (ending_choice == 1) {
                         system("cls");
                         printf("END\n");
-                        return 0;
+                        return;
                     }
                     else if (ending_choice == 2) {
                         system("cls");
@@ -472,7 +479,7 @@ void way_to_the_city() {
             system("cls");
             printf("Ruszyłeś w dalszą drogę do miasta\n");
             printf("Kliknij Enter aby kontynuować...\n");
-            getchar();
+            while (getchar() != '\n');
             getchar();
             city_menu();
             break;
@@ -480,12 +487,11 @@ void way_to_the_city() {
         else {
             system("cls");
             printf("Wprowadziłeś niepoprawną wartość spróbuj jeszcze raz\n");
-            printf("Kliknij Enter...\n");
-            getchar();
-            getchar();
+            printf("Wpisz:\n(tak) jeśli chcesz podnieść przedmiot\n(nie) jeśli chcesz go pominąć\n");
         }
     }
 }
+
 
 //-------------------------------------------------------------------Prolog i początek Gry-------------------------------------------------------------------------------------------------------------------/
 
@@ -589,7 +595,7 @@ void bank_worker() {
         printf("\033[36mPracowniczka banku:  Pieniądz to powszechnie akceptowany środek wymiany i przechowywania wartości.\nPełni rolę uniwersalnego środka płatniczego w transakcjach handlowych.\nPieniądz ułatwia wymianę dóbr i usług oraz umożliwia dokonywanie pomiaru wartości.\033[0m\n");
         update_ability(0, true);
         printf("\033[33m\nBrawo Alfred dowiedział się czym są pieniądze i jak ich używać!\n\033[0m");
-        printf("Wciśnij dowolny przycisk żeby wrócić na hol główny banku\n");
+        printf("Wciśnij Enter żeby wrócić na hol główny banku\n");
         getchar();
         getchar();
         bank_menu();
