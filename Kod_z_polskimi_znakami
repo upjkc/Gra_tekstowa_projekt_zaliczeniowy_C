@@ -1,5 +1,11 @@
 
+
+
 /*
+strlen(user_input) != 1 || user_input[0] != 't'
+
+
+
 
 Jednoręki Bandyta - by Jacek Puchałko
 
@@ -30,18 +36,18 @@ Jednoręki Bandyta - by Jacek Puchałko
     /  |  @ >
    /___|__   )
          |  |
-	     |  |
+         |  |
          |  |
          |-- \ _________ _
-        /     /         \  \__   
+        /     /         \  \__
        |               _/   _/
        \_      _____/     _/
          \_           ___/
            \___    __/
                \_|/
-		        ||
-	           _||
-	          >__/
+                ||
+               _||
+              >__/
 
    _____  .____   ________________________________________
   /  _  \ |    |  \_   _____/\______   \_   _____/\______ \
@@ -157,7 +163,6 @@ void go_back_to_home_ending();
 
 
 
-char select_location;
 char city_building_choice;
 int casino_enters_counter = 0;
 
@@ -210,7 +215,7 @@ void add_junk_part(int item_to_update, int add_amount) {
     }
 }
 
-void reset_players_stats(){
+void reset_players_stats() {
     alfred.broken_light_bulb = 0;
     alfred.garbage_can_lid = 0;
     alfred.goose_food = 0;
@@ -224,39 +229,56 @@ void reset_players_stats(){
 
 void go_back_to_the_city() {
     do {
-        char back_to_the_city;
+        char back_to_the_city[3]; 
+
         printf("Żeby powrócić do mapy miasta wpisz (m)\n");
-        scanf(" %c", &back_to_the_city);
-        if (back_to_the_city == 'm') {
+        if (scanf("%2s", back_to_the_city) != 1) { 
+            printf("Wystąpił błąd przy odczycie danych. Spróbuj jeszcze raz\n");
+            while (getchar() != '\n'); 
+            continue;
+        }
+
+        if (strlen(back_to_the_city) == 1 && back_to_the_city[0] == 'm') {
             city_menu();
             break;
         }
         else {
-            printf("Podałeś nie poprawną wartość. Spróbuj jeszcze raz\n");
+            printf("Podałeś niepoprawną wartość. Spróbuj jeszcze raz\n");
+            while (getchar() != '\n'); 
         }
     } while (1);
 }
 
+
 void go_back_to_home_ending() {
     while (1) {
-        char last_choice;
+        char last_choice[3];
+
         printf("Czy napewno chcesz użyć tej opcji?\n");
         printf("Jeżeli zawrócisz do domu bez potrzebnego jedzenia nie będziesz miał już więcej czasu żeby je zdobyć.\n");
         printf("Czy napewno chcesz zawrócić do domu?\n");
         printf("(t)tak\n(n)nie\n");
-        scanf(" %c", &last_choice);
-        if (last_choice == 't') {
-            break;
+
+        if (scanf("%2s", last_choice) != 1) {
+            printf("Wystąpił błąd przy odczycie danych. Spróbuj ponownie.\n");
+            while (getchar() != '\n');
+            continue;
         }
-        else if (last_choice == 'n') {
-            go_back_to_the_city();
-            break;
+
+        if (strlen(last_choice) == 1 && (last_choice[0] == 't' || last_choice[0] == 'n')) {
+            if (last_choice[0] == 't') {
+                printf("Decyzja: Zawracasz do domu.\n");
+                break;
+            }
+            else if (last_choice[0] == 'n') {
+                printf("Decyzja: Wracasz do miasta.\n");
+                go_back_to_the_city();
+                break;
+            }
         }
         else {
-            printf("Nieprawidłowy wybór.\n");
-            printf("\nNaciśnij Enter...");
-            getchar();
-            getchar();
+            printf("Nieprawidłowy wybór. Wprowadź tylko 't' lub 'n'.\n");
+            while (getchar() != '\n');
         }
     }
 
@@ -349,34 +371,34 @@ void prologue() {
     printf("               _||\n");
     printf("              >__/ \n", 92);
 
-        printf("   _____  .____   ________________________________________\n");
-        printf("  /  _  %c |    |  %c_   _____/%c______   %c_   _____/%c______ %c\n", 92, 92, 92, 92, 92, 92);
-        printf(" /  /_%c  %c|    |   |    __)   |       _/|    __)_  |    |  %c\n", 92, 92, 92);
-        printf("/    |    %c    |___|     %c    |    |   %c|        %c |    `   %c\n", 92, 92, 92, 92, 92);
-        printf("%c____|__  /_______ %c___  /    |____|_  /_______  //_______  /\n", 92, 92);
-        printf("        %c/        %c/   %c/            %c/        %c/         %c/\n", 92, 92, 92, 92, 92, 92);
-        printf("______________ ______________\n");
-        printf("%c__    ___/   |   %c_   _____/\n", 92, 92, 92);
-        printf("  |    | /    ~    %c    __)_\n", 92);
-        printf("  |    | %c    Y    /        %c\n", 92, 92);
-        printf("  |____|  %c___|_  /_______  /\n", 92);
-        printf("                %c/        %c/\n", 92, 92);
-        printf("  ________ ________   ________    ____________________\n");
-        printf(" /  _____/ %c_____  %c  %c_____  %c  /   _____/%c_   _____/\n", 92, 92, 92, 92, 92, 92);
-        printf("/   %c  ___  /   |   %c  /   |   %c %c_____  %c  |    __)_\n", 92, 92, 92, 92, 92);
-        printf("%c    %c_%c  %c/    |    %c/    |    %c/        %c |        %c\n", 92, 92, 92, 92, 92, 92, 92, 92);
-        printf(" %c______  /%c_______  /%c_______  /_______  //_______  /\n", 92, 92, 92);
-        printf("        %c/         %c/         %c/        %c/         %c/\n", 92, 92, 92, 92, 92);
+    printf("   _____  .____   ________________________________________\n");
+    printf("  /  _  %c |    |  %c_   _____/%c______   %c_   _____/%c______ %c\n", 92, 92, 92, 92, 92, 92);
+    printf(" /  /_%c  %c|    |   |    __)   |       _/|    __)_  |    |  %c\n", 92, 92, 92);
+    printf("/    |    %c    |___|     %c    |    |   %c|        %c |    `   %c\n", 92, 92, 92, 92, 92);
+    printf("%c____|__  /_______ %c___  /    |____|_  /_______  //_______  /\n", 92, 92);
+    printf("        %c/        %c/   %c/            %c/        %c/         %c/\n", 92, 92, 92, 92, 92, 92);
+    printf("______________ ______________\n");
+    printf("%c__    ___/   |   %c_   _____/\n", 92, 92, 92);
+    printf("  |    | /    ~    %c    __)_\n", 92);
+    printf("  |    | %c    Y    /        %c\n", 92, 92);
+    printf("  |____|  %c___|_  /_______  /\n", 92);
+    printf("                %c/        %c/\n", 92, 92);
+    printf("  ________ ________   ________    ____________________\n");
+    printf(" /  _____/ %c_____  %c  %c_____  %c  /   _____/%c_   _____/\n", 92, 92, 92, 92, 92, 92);
+    printf("/   %c  ___  /   |   %c  /   |   %c %c_____  %c  |    __)_\n", 92, 92, 92, 92, 92);
+    printf("%c    %c_%c  %c/    |    %c/    |    %c/        %c |        %c\n", 92, 92, 92, 92, 92, 92, 92, 92);
+    printf(" %c______  /%c_______  /%c_______  /_______  //_______  /\n", 92, 92, 92);
+    printf("        %c/         %c/         %c/        %c/         %c/\n", 92, 92, 92, 92, 92);
 
-        printf("\n\n\nAby rozpocząć rozgrywkę wciśnij Enter...");
-        getchar();
+    printf("\n\n\nAby rozpocząć rozgrywkę wciśnij Enter...");
+    getchar();
 
-        system("cls");
-        printf("Nazywasz się Albert. Jesteś gęsią, która żyje w swoim domu (gniezdzie) na polanie wraz ze swoim młodszym rodzeństwem.\nZbliża się zima i musisz zadbać o to żebyś ty i twoje młodsze rodzeństwo mieli co jeść.\nW tym celu masz zamiar wyruszyć do miasta bo słyszałeś, że tam najłatwiej zdobyć pokarm\n");
-        printf("Żeby twoja rodzina przetrwała zimę musisz uzbierać 20 worków karmy dla gęsi.\n");
+    system("cls");
+    printf("Nazywasz się Albert. Jesteś gęsią, która żyje w swoim domu (gnieździe) na polanie wraz ze swoim młodszym rodzeństwem.\nZbliża się zima i musisz zadbać o to żebyś ty i twoje młodsze rodzeństwo mieli co jeść.\nW tym celu masz zamiar wyruszyć do miasta bo słyszałeś, że tam najłatwiej zdobyć pokarm\n");
+    printf("Żeby twoja rodzina przetrwała zimę musisz uzbierać 20 worków karmy dla gęsi.\n");
 
-        printf("\nAby kontynuować wciśnij Enter...\n");
-        getchar();
+    printf("\nAby kontynuować wciśnij Enter...\n");
+    getchar();
 
 }
 
@@ -384,21 +406,28 @@ void prologue() {
 
 
 void start() {
+    char select_location[3];
     system("cls");
     printf("HONK!\n");
+    do {
     printf("Wziąłeś ze sobą gęsi plecak i jesteś gotowy do drogi\n");
     printf("(m)Żeby wyruszyć do Miasta ludzką drogą\n");
 
-    do {
-        scanf(" %c", &select_location);
-        select_location = tolower(select_location);
+        if (scanf("%2s", select_location) != 1) {
+            system("cls");
+            printf("Wystąpił błąd przy odczycie danych. Spróbuj jeszcze raz\n");
+            while (getchar() != '\n');
+            continue;
+        }
 
-        if (select_location == 'm') {
+        if (strlen(select_location) == 1 && select_location[0] == 'm') {
             way_to_the_city();
             break;
         }
         else {
+            system("cls");
             printf("Wprowadzono niepoprawną wartość. Spróbuj ponownie.\n");
+            while (getchar() != '\n');
         }
     } while (1);
 }
@@ -517,82 +546,83 @@ void city_menu() {
     system("cls");
     printf("Witaj w mieście\n");
     printf("                                    +					\n");
-    printf("                                   / %c					\n",92);
-    printf(" _____        _____     __________/ o %c/%c_________      _________	\n",92,92);
-    printf("|o o o|_______|    |___|               | | # # #  |____|o o o o  | /%c	\n",92);
-    printf("|o o o|  * * *|: ::|. .|               |o| # # #  |. . |o o o o  |//%c%c	\n",92,92);
+    printf("                                   / %c					\n", 92);
+    printf(" _____        _____     __________/ o %c/%c_________      _________	\n", 92, 92);
+    printf("|o o o|_______|    |___|               | | # # #  |____|o o o o  | /%c	\n", 92);
+    printf("|o o o|  * * *|: ::|. .|               |o| # # #  |. . |o o o o  |//%c%c	\n", 92, 92);
     printf("|o o o|* * *  |::  |. .| []  []  []  []|o| # # #  |. . |o o o o  |((|))	\n");
     printf("|o o o|**  ** |:  :|. .| []  []  []    |o| # # #  |. . |o o o o  |((|))	\n");
-    printf("|_[]__|__[]___|_||_|__<|____________;;_|_|___/%c___|_.|_|____[]___|  |	\n\n\n",92);
+    printf("|_[]__|__[]___|_||_|__<|____________;;_|_|___/%c___|_.|_|____[]___|  |	\n\n\n", 92);
     printf("W mieście jest wiele miejsc i budynków. Wybierz, który z nich chciałbyś odwiedzić:\n");
     printf("(b) Bank\n(s) Sklep\n(a) Kasyno\n(w) Wysypisko\n(m) Małe Zoo\n");
     printf("\nW tym miejscu możesz również wybrać:\n(i)Zajrzyj do ekwipunku\n(z)Zawróć do domu\n(c)Credits\n\n");
 
 
 
-        printf("Wybierz miejsce: ");
-        scanf(" %c", &city_building_choice);
+    printf("Wybierz miejsce: ");
+    scanf(" %c", &city_building_choice);
 
 
-        switch (city_building_choice) {
-        case 'b':
-            system("cls");
-            bank_menu();
-            break;
-        case 's':
-            system("cls");
-            shop_menu();
-            break;
-        case 'a':
-            system("cls");
-            casino_menu();
-            break;
-        case 'w':
-            system("cls");
-            rubbish_dump_menu();
-            break;
-        case 'm':
-            system("cls");
-            mini_Zoo_menu();
-            break;
-        case 'i':
-            system("cls");
-            printf("Oto twój ekwipunek:\n");
-            print_goose_info();
-            break;
-        case 'z':
-            system("cls");
-            go_back_to_home_ending();
-            break;
-        case 'c':
-            system("cls");
-            show_credits();
-            break;
-        default:
-            printf("Nieprawidłowy wybór.\n");
-            printf("\nNaciśnij Enter...");
-            getchar();
-            getchar();
-            city_menu();
-        }
+    switch (city_building_choice) {
+    case 'b':
+        system("cls");
+        bank_menu();
+        break;
+    case 's':
+        system("cls");
+        shop_menu();
+        break;
+    case 'a':
+        system("cls");
+        casino_menu();
+        break;
+    case 'w':
+        system("cls");
+        rubbish_dump_menu();
+        break;
+    case 'm':
+        system("cls");
+        mini_Zoo_menu();
+        break;
+    case 'i':
+        system("cls");
+        printf("Oto twój ekwipunek:\n");
+        print_goose_info();
+        break;
+    case 'z':
+        system("cls");
+        go_back_to_home_ending();
+        break;
+    case 'c':
+        system("cls");
+        show_credits();
+        break;
+    default:
+        printf("Nieprawidłowy wybór.\n");
+        printf("\nNaciśnij Enter...");
+        getchar();
+        getchar();
+        city_menu();
+    }
 }
 //------------------------------------------------------------------------Main Menu--------------------------------------------------------------------------------------------------------------------------/
 
 //------------------------------------------------------------------------Bank-------------------------------------------------------------------------------------------------------------------------------/
 void bank_worker() {
-    char conversation_choice;
-    printf("\033[36mPracowniczka banku:  Dzień dobry w czym mogę pomóc?! Czy pan jest Gęsią?\033[0m\n(t)tak\n(n)nie\n");
-    scanf(" %c", &conversation_choice);
+    int conversation_choice;
+    printf("\033[36mPracownica banku:  Dzień dobry w czym mogę pomóc?! Czy pan jest Gęsią?\033[0m\n(1) Tak\n(dowolna inna liczba) Nie\n");
+    scanf("%d", &conversation_choice);
 
-    if (conversation_choice == 't') {
-        printf("\033[36mPracowniczka banku:  W takim razie w czym mogę pomóc?\033[0m\n(1)Zdobądź informacje o tym jak używać pieniędzy\n(2)Odejdź\n");
+    if (conversation_choice == 1) {
+        printf("\033[36mPracownica banku:  W takim razie w czym mogę pomóc?\033[0m\n(1) Zdobądź informacje o tym jak używać pieniędzy\n(dowolna inna liczba) Odejdź\n");
     }
-    else{
-        printf("\033[36mPracowniczka banku:  Przepraszam pana słabo widzę bez okularów. W takim razie w czym mogę pomóc?\033[0m\n(1)Zdobądź informacje o tym jak używać pieniędzy\n(wciśnij jaki kolwiek inny przycisk)Odejdź\n");
+    else {
+        printf("\033[36mPracownica banku:  Przepraszam pana słabo widzę bez okularów. W takim razie w czym mogę pomóc?\033[0m\n(1) Zdobądź informacje o tym jak używać pieniędzy\n(dowolna inna liczba) Odejdź\n");
     }
-    scanf(" %c", &conversation_choice);
-    if (conversation_choice == '1') {
-        printf("\033[36mPracowniczka banku:  Pieniądz to powszechnie akceptowany środek wymiany i przechowywania wartości.\nPełni rolę uniwersalnego środka płatniczego w transakcjach handlowych.\nPieniądz ułatwia wymianę dóbr i usług oraz umożliwia dokonywanie pomiaru wartości.\033[0m\n");
+
+    scanf("%d", &conversation_choice);
+    if (conversation_choice == 1) {
+        printf("\033[36mPracownica banku:  Pieniądz to powszechnie akceptowany środek wymiany i przechowywania wartości.\nPełni rolę uniwersalnego środka płatniczego w transakcjach handlowych.\nPieniądz ułatwia wymianę dóbr i usług oraz umożliwia dokonywanie pomiaru wartości.\033[0m\n");
         update_ability(0, true);
         printf("\033[33m\nBrawo Alfred dowiedział się czym są pieniądze i jak ich używać!\n\033[0m");
         printf("Wciśnij Enter żeby wrócić na hol główny banku\n");
@@ -600,7 +630,7 @@ void bank_worker() {
         getchar();
         bank_menu();
     }
-    else{
+    else {
         bank_menu();
     }
 }
@@ -612,27 +642,27 @@ void bank_menu() {
     printf("Bank\n");
     printf("W banku widzisz pracowniczkę banku i szefa banku, który rozmawia z jednym ze swoich pracowników\n");
     printf("Wybierz co chcesz zrobić w banku:\n(1)Porozmawiaj z pracowniczką banku\n(2)Porozmawiaj z szefem banku\n(3)Wyjdź z banku\n");
-        char bank_worker_choice;
-        scanf(" %c", &bank_worker_choice);
-        
-        if (bank_worker_choice == '1') {
-            bank_worker();
-        }
-        else if (bank_worker_choice == '2') {
-            printf("Szef banku jest w tej chwili zajęty i nie może z tobą porozmawiać.\nWciśnij dowolny przycisk żeby wrócić\n");
-            getchar();
-            getchar();
-            bank_menu();
-        }
-        else if (bank_worker_choice == '3') {
-            go_back_to_the_city();
-        }
-        else {
-            printf("Wprowadzono niepoprawne dane.\nWciśnij dowolny przycisk żeby spróbować jeszcze raz\n");
-            getchar();
-            getchar();
-            bank_menu();
-        }
+    char bank_worker_choice;
+    scanf(" %d", &bank_worker_choice);
+
+    if (bank_worker_choice == 1) {
+        bank_worker();
+    }
+    else if (bank_worker_choice == 2) {
+        printf("Szef banku jest w tej chwili zajęty i nie może z tobą porozmawiać.\n(dowolny znak, litera lub liczba a następnie Enter)żeby wrócić\n");
+        getchar();
+        getchar();
+        bank_menu();
+    }
+    else if (bank_worker_choice == 3) {
+        go_back_to_the_city();
+    }
+    else {
+        printf("Wprowadzono niepoprawne dane.\nWciśnij dowolny przycisk żeby spróbować jeszcze raz\n");
+        getchar();
+        getchar();
+        bank_menu();
+    }
 }
 //------------------------------------------------------------------------Bank-------------------------------------------------------------------------------------------------------------------------------/
 
@@ -678,7 +708,7 @@ void display_hp() {
 void shopseller_fight() {
     system("cls");
     char fight_or_no_fight;
-    printf("Czy na pewno chcesz zabrać karmę dla gęsi ze sklepu bez pozwolenia właściciela?\n(t)tak\n(dowolny znak, litera lub liczba)nie\n");
+    printf("Czy na pewno chcesz zabrać karmę dla gęsi ze sklepu bez pozwolenia właściciela?\n(t)tak\n(dowolny znak, litera lub liczba a następnie Enter)nie\n");
     scanf(" %c", &fight_or_no_fight);
 
     if (fight_or_no_fight == 't') {
@@ -689,19 +719,19 @@ void shopseller_fight() {
 
         while (goose_hp > 0 && sellers_hp > 0) {
             printf("\nRunda %d:\n", round);
-            display_hp();  
+            display_hp();
 
             // Tura gracza, wybór akcji
             printf("Wybierz akcję:\n");
             printf("(a) Dziobanie (5 obrażeń)\n");
-            printf("(b) HONK! (30%c szans na zastraszenie oponenta)\n",37);
+            printf("(b) HONK! (30%c szans na zastraszenie oponenta)\n", 37);
             scanf(" %c", &attack_move_choice);
 
             if (attack_move_choice == 'a') {
-                player_peck();  
+                player_peck();
             }
             else if (attack_move_choice == 'b') {
-                player_scare_HONK();  
+                player_scare_HONK();
             }
             else {
                 printf("Niepoprawny wybór. Spróbuj ponownie.\n");
@@ -724,11 +754,11 @@ void shopseller_fight() {
             else if (goose_hp <= 0) {
                 while (1) {
                     printf("\033[31m       ______      _____ _________ _                   \n");
-                    printf("      /%c     %c____/     /         %c  %c__               \n",92,92,92,92);
+                    printf("      /%c     %c____/     /         %c  %c__               \n", 92, 92, 92, 92);
                     printf("     /  |   X  ___                _/   _/              \n");
-                    printf("    /___|_____)  %c_      _____/     _/                 \n",92);
-                    printf("|^^________________%c_           ___/________________^^|\n",92);
-                    printf("|____________________%c_________/______________________|\n\n\n",92);
+                    printf("    /___|_____)  %c_      _____/     _/                 \n", 92);
+                    printf("|^^________________%c_           ___/________________^^|\n", 92);
+                    printf("|____________________%c_________/______________________|\n\n\n", 92);
                     printf("Zostałeś pokonany przez Sprzedawcę!\n");
                     printf("Przez to nie wróciłeś do swojej gęsiej rodziny i twoje dzieci umarły z powodu zimna i głodu.\033[0m\n");
                     printf("Czy chcesz zagrać ponownie czy zakończyć rozgrywkę:\n");
@@ -780,7 +810,7 @@ void shopseller_fight() {
                 break;
             }
             else if (goose_hp <= 0) {
-                while (1) { 
+                while (1) {
                     printf("\033[31m       ______      _____ _________ _                   \n");
                     printf("      /%c     %c____/     /         %c  %c__               \n", 92, 92, 92, 92);
                     printf("     /  |   X  ___                _/   _/              \n");
@@ -797,16 +827,16 @@ void shopseller_fight() {
                     int result = scanf(" %d", &ending_choice);
 
                     if (result != 1) {
-                        
+
                         printf("Wprowadziłeś niepoprawną wartość. Spróbuj ponownie.\n");
-                        while (getchar() != '\n'); 
+                        while (getchar() != '\n');
                         continue;
                     }
 
                     if (ending_choice == 1) {
                         system("cls");
                         printf("END\n");
-                        return 0; 
+                        return 0;
                     }
                     else if (ending_choice == 2) {
                         system("cls");
@@ -831,7 +861,6 @@ void shopseller_fight() {
         city_menu();
     }
 }
-// Walka do dokończenia koniecznie (zakończenia walki do zrobienia)
 //------------------------------------------------------------------------Opcjonalna_Walka-----------------------------------------------------------/
 
 
@@ -843,7 +872,7 @@ void shop_menu() {
     int quantity_of_goose_food_bags;
     system("cls");
     printf("Wszedłeś do Sklepu. W powietrzu udało ci się wyczuć woń karmy dla gęsi. Widzisz Sprzedawcę co robisz?\n");
-    printf("(a)Podejdz do sprzedawcy\n(b)spróbuj okraść sklep\n(dowolna znak, litera lub liczba) Wyjdź ze sklepu\n");
+    printf("(a)Podejdz do sprzedawcy\n(b)spróbuj okraść sklep\n(dowolny znak, litera lub liczba a następnie Enter) Wyjdź ze sklepu\n");
     scanf(" %c", &shop_choice);
 
     if ((shop_choice == 'a') && (alfred.using_money_ability == true)) {
@@ -883,7 +912,7 @@ void shop_menu() {
                 }
                 else {
                     printf("Podałeś wartość, która nie jest numerem. Ponów próbę wprowadzenia wartości.\n");
-                    while (getchar() != '\n'); 
+                    while (getchar() != '\n');
                 }
             } while (1);
         }
@@ -901,7 +930,7 @@ void shop_menu() {
             getchar();
             shop_menu();
         }
-        else if(shop_choice_2 == '2') {
+        else if (shop_choice_2 == '2') {
             go_back_to_the_city();
         }
         else {
@@ -941,53 +970,53 @@ void shop_menu() {
 
 */
 
-void spin_the_numbers_in_machine() {
-    system("cls");
-    int random_number_1;
-    int random_number_2;
-    int random_number_3;
-    add_money(-2);
-    random_number_1 = rand() % 7 + 1;
-    random_number_2 = rand() % 7 + 1;
-    random_number_3 = rand() % 7 + 1;
-    printf("%d, %d, %d", random_number_1, random_number_2, random_number_3);
-    if ((random_number_1 == random_number_2) && (random_number_2 == random_number_3)) {
-        printf("\033[33mMaszyna do gry (jednoręki bandyta)\n\n");
-        printf("      ___________      \n");
-        printf("     /___________%c     \n", 92);
-        printf("     |  _______  | ({})\n");
-        printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
-        printf("     |  ```````  |__|| \n");
-        printf("     |:::::::::::|---' \n");
-        printf("     |  BIG WIN  |     \n");
-        printf("     |:::::::::::|     \n");
-        printf("     |___________|     \n\n");
-        printf(" _______   ______   ______         __       __  ______  __    __ \n");
-        printf("/       %c /      | /      %c       /  |  _  /  |/      |/  %c  /  |\n", 92, 92, 92);
-        printf("$$$$$$$  |$$$$$$/ /$$$$$$  |      $$ | / %c $$ |$$$$$$/ $$  %c $$ |\n", 92, 92);
-        printf("$$ |__$$ |  $$ |  $$ | _$$/       $$ |/$  %c$$ |  $$ |  $$$  %c$$ |\n", 92, 92);
-        printf("$$    $$<   $$ |  $$ |/    |      $$ /$$$  $$ |  $$ |  $$$$  $$ |\n");
-        printf("$$$$$$$  |  $$ |  $$ |$$$$ |      $$ $$/$$ $$ |  $$ |  $$ $$ $$ |\n");
-        printf("$$ |__$$ | _$$ |_ $$ %c__$$ |      $$$$/  $$$$ | _$$ |_ $$ |$$$$ |\n", 92);
-        printf("$$    $$/ / $$   |$$    $$/       $$$/    $$$ |/ $$   |$$ | $$$ |\n");
-        printf("$$$$$$$/  $$$$$$/  $$$$$$/        $$/      $$/ $$$$$$/ $$/   $$/ \n\033[0m");
-
-    }
-    else {
-        printf("Maszyna do gry (jednoręki bandyta)\n\n");
-        printf("      ___________      \n");
-        printf("     /___________%c     \n", 92);
-        printf("     |  _______  | ({})\n");
-        printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
-        printf("     |  ```````  |__|| \n");
-        printf("     |:::::::::::|---' \n");
-        printf("     |           |     \n");
-        printf("     |:::::::::::|     \n");
-        printf("     |___________|     \n\n");
-        printf("Niczego nie wygrałeś\n");
-
-    }
-}
+//void spin_the_numbers_in_machine() {
+//    system("cls");
+//    int random_number_1;
+//    int random_number_2;
+//    int random_number_3;
+//    add_money(-2);
+//    random_number_1 = rand() % 7 + 1;
+//    random_number_2 = rand() % 7 + 1;
+//    random_number_3 = rand() % 7 + 1;
+//    printf("%d, %d, %d", random_number_1, random_number_2, random_number_3);
+//    if ((random_number_1 == random_number_2) && (random_number_2 == random_number_3)) {
+//        printf("\033[33mMaszyna do gry (jednoręki bandyta)\n\n");
+//        printf("      ___________      \n");
+//        printf("     /___________%c     \n", 92);
+//        printf("     |  _______  | ({})\n");
+//        printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
+//        printf("     |  ```````  |__|| \n");
+//        printf("     |:::::::::::|---' \n");
+//        printf("     |  BIG WIN  |     \n");
+//        printf("     |:::::::::::|     \n");
+//        printf("     |___________|     \n\n");
+//        printf(" _______   ______   ______         __       __  ______  __    __ \n");
+//        printf("/       %c /      | /      %c       /  |  _  /  |/      |/  %c  /  |\n", 92, 92, 92);
+//        printf("$$$$$$$  |$$$$$$/ /$$$$$$  |      $$ | / %c $$ |$$$$$$/ $$  %c $$ |\n", 92, 92);
+//        printf("$$ |__$$ |  $$ |  $$ | _$$/       $$ |/$  %c$$ |  $$ |  $$$  %c$$ |\n", 92, 92);
+//        printf("$$    $$<   $$ |  $$ |/    |      $$ /$$$  $$ |  $$ |  $$$$  $$ |\n");
+//        printf("$$$$$$$  |  $$ |  $$ |$$$$ |      $$ $$/$$ $$ |  $$ |  $$ $$ $$ |\n");
+//        printf("$$ |__$$ | _$$ |_ $$ %c__$$ |      $$$$/  $$$$ | _$$ |_ $$ |$$$$ |\n", 92);
+//        printf("$$    $$/ / $$   |$$    $$/       $$$/    $$$ |/ $$   |$$ | $$$ |\n");
+//        printf("$$$$$$$/  $$$$$$/  $$$$$$/        $$/      $$/ $$$$$$/ $$/   $$/ \n\033[0m");
+//
+//    }
+//    else {
+//        printf("Maszyna do gry (jednoręki bandyta)\n\n");
+//        printf("      ___________      \n");
+//        printf("     /___________%c     \n", 92);
+//        printf("     |  _______  | ({})\n");
+//        printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
+//        printf("     |  ```````  |__|| \n");
+//        printf("     |:::::::::::|---' \n");
+//        printf("     |           |     \n");
+//        printf("     |:::::::::::|     \n");
+//        printf("     |___________|     \n\n");
+//        printf("Niczego nie wygrałeś\n");
+//
+//    }
+//}
 
 
 void slot_machine() {
@@ -1082,7 +1111,7 @@ void slot_machine() {
                             printf("Wprowadziłeś niepoprawną wartość. Spróbuj ponownie.\n");
                         }
                     }
-                    
+
                 }
                 else if (try_spinning_again_or_no == 'n') {
                     system("cls");
@@ -1127,7 +1156,7 @@ void slot_machine() {
                 printf("      ___________      \n");
                 printf("     /___________%c     \n", 92);
                 printf("     |  _______  | ({})\n");
-                printf("     |  |%d|%d|%d|  |  || \n",random_number_1, random_number_2, random_number_3);
+                printf("     |  |%d|%d|%d|  |  || \n", random_number_1, random_number_2, random_number_3);
                 printf("     |  ```````  |__|| \n");
                 printf("     |:::::::::::|---' \n");
                 printf("     |           |     \n");
@@ -1194,7 +1223,7 @@ void casino_menu() {
             else if (casino_choice_first_time == 'n') {
                 casino_enters_counter += 1;
                 go_back_to_the_city();
-                return;  
+                return;
             }
             else {
                 system("cls");
@@ -1211,10 +1240,10 @@ void casino_menu() {
         if ((casino_choice_1 == 't') && (alfred.using_money_ability == true)) {
             casino_enters_counter += 1;
             slot_machine();
-            
+
             break;
         }
-        else if((casino_choice_1 == 't') && (alfred.using_money_ability == false)){
+        else if ((casino_choice_1 == 't') && (alfred.using_money_ability == false)) {
             printf("Nie wiesz jak działają pieniądze więc nie możesz zagrać w kasynie.\nDowiedz się jak działają pieniądze\n");
             go_back_to_the_city();
         }
@@ -1243,10 +1272,10 @@ void work_in_the_mini_zoo() {
 
     while (1) {
         system("cls");
-    printf("Rozpoczęcie godziny pracy\n");
-    printf("Problem 1\nDziecko próbuje złapać cię za skrzydło. Co robisz?\n");
-    printf("(1)Uciekasz\n(2)Uderzasz je lekko skrzydłem\n");
-    scanf(" %c", &zoo_work_choice_1);
+        printf("Rozpoczęcie godziny pracy\n");
+        printf("Problem 1\nDziecko próbuje złapać cię za skrzydło. Co robisz?\n");
+        printf("(1)Uciekasz\n(2)Uderzasz je lekko skrzydłem\n");
+        scanf(" %c", &zoo_work_choice_1);
 
         if (zoo_work_choice_1 == '1') {
             printf("Udało ci się uciec.\n");
@@ -1267,9 +1296,9 @@ void work_in_the_mini_zoo() {
 
     while (1) {
         system("cls");
-    printf("Problem 2\nDziecko chce cię dokarmić\n");
-    printf("(1)Zjedz jedzenie, które dało ci dziecko\n(2)Odejdź\n");
-    scanf(" %c", &zoo_work_choice_2);
+        printf("Problem 2\nDziecko chce cię dokarmić\n");
+        printf("(1)Zjedz jedzenie, które dało ci dziecko\n(2)Odejdź\n");
+        scanf(" %c", &zoo_work_choice_2);
 
         if (zoo_work_choice_2 == '1') {
             printf("Jedzenie nie było gęsią karmą, ale o dziwo ci nie zaszkodziło\n");
@@ -1290,9 +1319,9 @@ void work_in_the_mini_zoo() {
 
     while (1) {
         system("cls");
-    printf("Problem 3\nDziecko zmierza w twoją stronę i chce cię pogłaskać\n");
-    printf("(1)Ucieknij\n(2)Ukryj się\n");
-    scanf(" %c", &zoo_work_choice_3);
+        printf("Problem 3\nDziecko zmierza w twoją stronę i chce cię pogłaskać\n");
+        printf("(1)Ucieknij\n(2)Ukryj się\n");
+        scanf(" %c", &zoo_work_choice_3);
 
         if (zoo_work_choice_3 == '1') {
             printf("Uciekłeś w popłochu, niestety zauważył to twój szef.\n");
@@ -1313,9 +1342,9 @@ void work_in_the_mini_zoo() {
 
     while (1) {
         system("cls");
-    printf("Problem 4\nDziecko rzuciło w ciebie kamieniem. Na szczęście nie trafiło\n");
-    printf("(1)HONK!\n(2)Podziób\n");
-    scanf(" %c", &zoo_work_choice_4);
+        printf("Problem 4\nDziecko rzuciło w ciebie kamieniem. Na szczęście nie trafiło\n");
+        printf("(1)HONK!\n(2)Podziób\n");
+        scanf(" %c", &zoo_work_choice_4);
 
         if (zoo_work_choice_4 == '1') {
             printf("Wystraszyłeś dziecko, ale pracodawca zrozumiał, że to była samoobrona, więc nie potrącił ci z wypłaty.\n");
@@ -1396,7 +1425,7 @@ void search_in_trash() {
     char go_again_or_stop[10];
     int keep_searching = 1;
 
-    while (keep_searching) { 
+    while (keep_searching) {
         int random = rand() % 100;
 
         if (random < 40) {
@@ -1447,28 +1476,28 @@ void search_in_trash() {
 void racoon_ending() {
     system("cls");
     printf("\033[33mDzięki jedzeniu, które zdobył dla ciebie Benedykt twoja rodzina przetrwała zimę.\n\n");
-        printf("Wygrałeś\n");
-        printf("\n");
-        printf("      ______\n");
-        printf("     /%c     |\n", 92);
-        printf("    /  |  @ >\n");
-        printf("   /___|__   )\n");
-        printf("         |  |\n");
-        printf("         |  |\n");
-        printf("         |  |\n");
-        printf("         |-- %c _________ _\n", 92);
-        printf("        /     /         %c  %c__   \n", 92, 92);
-        printf("       |               _/   _/\n", 92);
-        printf("       %c_      _____/     _/\n", 92, 92);
-        printf("         %c_           ___/\n", 92, 92);
-        printf("           %c___    __/\n", 92, 92);
-        printf("               %c_|/\n", 92, 92);
-        printf("                ||\n");
-        printf("               _||\n");
-        printf("              >__/ \n", 92);
-        printf("Gratulacje Alfredzie\033[0m\n");
-        getchar();
-        return 0;
+    printf("Wygrałeś\n");
+    printf("\n");
+    printf("      ______\n");
+    printf("     /%c     |\n", 92);
+    printf("    /  |  @ >\n");
+    printf("   /___|__   )\n");
+    printf("         |  |\n");
+    printf("         |  |\n");
+    printf("         |  |\n");
+    printf("         |-- %c _________ _\n", 92);
+    printf("        /     /         %c  %c__   \n", 92, 92);
+    printf("       |               _/   _/\n", 92);
+    printf("       %c_      _____/     _/\n", 92, 92);
+    printf("         %c_           ___/\n", 92, 92);
+    printf("           %c___    __/\n", 92, 92);
+    printf("               %c_|/\n", 92, 92);
+    printf("                ||\n");
+    printf("               _||\n");
+    printf("              >__/ \n", 92);
+    printf("Gratulacje Alfredzie\033[0m\n");
+    getchar();
+    return 0;
 }
 
 //95
@@ -1553,7 +1582,7 @@ void meet_the_racoon() {
 }
 
 
-void rubbish_dump_menu(){
+void rubbish_dump_menu() {
     system("cls");
     printf("Wszedłeś na teren wysypiska\n");
     printf("Wokół na pierwszy rzut oka widać było tylko góry różnego rodzaju śmieci.\n W oddali dostrzegłeś jednak zwierzęcą sylwetkę\n");
@@ -1564,11 +1593,11 @@ void rubbish_dump_menu(){
         scanf(" %c", &dump_menu_choice_1);
         if (dump_menu_choice_1 == '1') {
             search_in_trash();
-        break;
+            break;
         }
         else if (dump_menu_choice_1 == '2') {
             meet_the_racoon();
-        break;
+            break;
         }
         else if (dump_menu_choice_1 == '3') {
             go_back_to_the_city();
