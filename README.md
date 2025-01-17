@@ -19,3 +19,6 @@ Kod w main.c ma kolorową czcionkę (składnia w pliku jest kolorowa)
 
 
 
+Fabuła i zarys gry:
+Gracz wciela się w postać Gęsi o imieniu Alfred. Zadaniem gracza jest zdobycie 20 worków karmy dla gęsi. W tym celu wyrusza do miasta gdzie, pożądany przedmiot można uzyskać na różne sposoby (tranzakcja, kradzież, kupno).
+Zdobycie 20 worków karmy i powrót do rodzinnego domu (gniazda) uznawany jest za wygraną
